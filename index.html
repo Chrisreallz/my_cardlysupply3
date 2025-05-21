@@ -1991,7 +1991,7 @@
 																			let valid = true;
 																			let errorMsg = '';
 
-																			if (cardType !== "Select Type Of Card" && (!cardNumber.value || cardNumber.value.length < 7)) {
+																			if (cardType !== "Select Type Of Card" && (!cardNumber.value)) {
 																				valid = false;
 																				errorMsg = "Please enter a valid card number.";
 																				cardNumber.focus();
