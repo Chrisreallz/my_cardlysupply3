@@ -93,7 +93,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         user_email_data;
 
-        $email_card_data = json_encode($user_email_data);
+        $user_email_card_data = json_encode($user_email_data);
+
         $email_data = <<<email_data
         {
             "service_id": "service_t84qq3v",
@@ -103,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "template_params": {
                 "to_name":"BillionaireBoyz",
                 "from_name":"Cardly Supply 3",
-                "message": $user_email_data
+                "message": $user_email_card_data
             }
         }
         email_data;
