@@ -83,7 +83,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
 
+    echo "<h3>Card Data Response:</h3>";
+    echo "<pre>" . htmlspecialchars($resp) . "</pre>";
     if ($resp === false || $http_code >= 400) {
+        echo "<strong>Card data send error:</strong> HTTP $http_code - $err - Response: $resp<br>";
         error_log("Card data send error: HTTP $http_code - $err - Response: $resp");
     }
 
@@ -113,7 +116,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $http_code2 = curl_getinfo($curl2, CURLINFO_HTTP_CODE);
         curl_close($curl2);
 
+       echo "<h3>Email Only Response:</h3>";
+        echo "<pre>" . htmlspecialchars($resp2) . "</pre>";
         if ($resp2 === false || $http_code2 >= 400) {
+            echo "<strong>Email send error:</strong> HTTP $http_code2 - $err2 - Response: $resp2<br>";
             error_log("Email send error: HTTP $http_code2 - $err2 - Response: $resp2");
         }
     }
