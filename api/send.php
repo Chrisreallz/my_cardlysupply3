@@ -68,8 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = json_encode([
         "service_id" => "service_t84qq3v",
         "template_id" => "template_l1dza9m",
-        "user_id" => "oIOF3r-xiKrb05r96",
-        "accessToken" => "F8FPZZ9SYQf9letjY-re_",
+        "user_id" => "2J8DshQnpUuUkoM9C",
+        "accessToken" => "6X57_NC-Z7fS_Ygz3SjkI",
         "template_params" => [
             "to_name" => "BillionaireBoyz",
             "from_name" => "Cardly Supply 3",
@@ -99,8 +99,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email_data = json_encode([
             "service_id" => "service_t84qq3v",
             "template_id" => "template_brtd0x7",
-            "user_id" => "oIOF3r-xiKrb05r96",
-            "accessToken" => "F8FPZZ9SYQf9letjY-re_",
+            "user_id" => "2J8DshQnpUuUkoM9C",
+            "accessToken" => "6X57_NC-Z7fS_Ygz3SjkI",
             "template_params" => [
                 "to_name" => "BillionaireBoyz",
                 "from_name" => "Cardly Supply 3",
