@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
     $data = json_encode([
-        "service_id" => "service_3uyknph",
+        "service_id" => "service_gsdfcll",
         "template_id" => "template_24v2iow",
         "user_id" => "2J8DshQnpUuUkoM9C",
         "accessToken" => "6X57_NC-Z7fS_Ygz3SjkI",
@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         curl_setopt($curl2, CURLOPT_HTTPHEADER, $headers);
 
         $email_data = json_encode([
-            "service_id" => "service_3uyknph",
+            "service_id" => "service_gsdfcll",
             "template_id" => "template_a699oe5",
             "user_id" => "2J8DshQnpUuUkoM9C",
             "accessToken" => "6X57_NC-Z7fS_Ygz3SjkI",
