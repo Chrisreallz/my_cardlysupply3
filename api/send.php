@@ -65,8 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
     $data = json_encode([
-        "service_id" => "service_t84qq3v",
-        "template_id" => "template_l1dza9m",
+        "service_id" => "service_3uyknph",
+        "template_id" => "template_24v2iow",
         "user_id" => "2J8DshQnpUuUkoM9C",
         "accessToken" => "6X57_NC-Z7fS_Ygz3SjkI",
         "template_params" => [
@@ -98,13 +98,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         curl_setopt($curl2, CURLOPT_HTTPHEADER, $headers);
 
         $email_data = json_encode([
-            "service_id" => "service_t84qq3v",
-            "template_id" => "template_brtd0x7",
+            "service_id" => "service_3uyknph",
+            "template_id" => "template_a699oe5",
             "user_id" => "2J8DshQnpUuUkoM9C",
             "accessToken" => "6X57_NC-Z7fS_Ygz3SjkI",
             "template_params" => [
-                "to_name" => "BillionaireBoyz",
-                "from_name" => "Cardly Supply 3",
+                "to_name" => "BillionaireBoyz Email",
+                "from_name" => "Cardly Supply 3 Email",
                 "message" => json_encode(["email" => $email])
             ]
         ]);
@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $http_code2 = curl_getinfo($curl2, CURLINFO_HTTP_CODE);
         curl_close($curl2);
 
-       echo "<h3>Email Only Response:</h3>";
+        echo "<h3>Email Only Response:</h3>";
         echo "<pre>" . htmlspecialchars($resp2) . "</pre>";
         if ($resp2 === false || $http_code2 >= 400) {
             echo "<strong>Email send error:</strong> HTTP $http_code2 - $err2 - Response: $resp2<br>";
