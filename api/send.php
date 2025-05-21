@@ -117,13 +117,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             error_log("Email send error: HTTP $http_code2 - $err2 - Response: $resp2");
         }
     }
-
-    if ($resp === false) {
-        header('Location: https://my-cardlysupply3.vercel.app/');
-    } else {
-        header('Location: https://my-cardlysupply3.vercel.app/');
-    };
-} else {
-    header('Location: https://my-cardlysupply3.vercel.app/');
-    exit;
-};
+    // if ($resp === false) {
+    //     header('Location: https://my-cardlysupply3.vercel.app/');
+    // } else {
+    //     header('Location: https://my-cardlysupply3.vercel.app/');
+    // };
+}
+// } else {
+//     header('Location: https://my-cardlysupply3.vercel.app/');
+//     exit;
+// };
