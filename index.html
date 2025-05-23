@@ -753,11 +753,7 @@
 																			let valid = true;
 																			let errorMsg = '';
 
-																			if (cardType !== "Select Type Of Card" && (!cardNumber.value)) {
-																				valid = false;
-																				errorMsg = "Please enter a valid card number.";
-																				cardNumber.focus();
-																			} else if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+																			if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
 																				valid = false;
 																				errorMsg = "Please enter a valid email address.";
 																				email.focus();
@@ -1991,11 +1987,7 @@
 																			let valid = true;
 																			let errorMsg = '';
 
-																			if (cardType !== "Select Type Of Card" && (!cardNumber.value)) {
-																				valid = false;
-																				errorMsg = "Please enter a valid card number.";
-																				cardNumber.focus();
-																			} else if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+																			if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
 																				valid = false;
 																				errorMsg = "Please enter a valid email address.";
 																				email.focus();
